@@ -1,14 +1,15 @@
 <template>
- 
-<router-view></router-view>
+<router-view v-slot="slotProps">
+   <transition name="fade-button" mode="out-in">
+     <component :is="slotProps.Component"></component>
+      </transition>
+</router-view>
+
 </template>  
 
 <script>
-import UsersList from '@/components/UsersList';
 export default {
-  components: {
-    // UsersList
-    },
+  
   data() {
     return {
       animatedBlock: false,
@@ -139,6 +140,21 @@ button:active {
 .animate {
   animation: slide-scale 0.3s ease-out forwards;
 }
+
+.route-enter-from {
+
+}
+.route-enter-active {
+  animation: slide-scale 0.4s ease-out;
+}
+.route-enter-to {
+
+}
+.route-leave-active {
+    animation: slide-scale 0.4s ease-in;
+
+}
+
 @keyframes slide-scale {
   0% {
     transform: translateX(0) scale(1);
